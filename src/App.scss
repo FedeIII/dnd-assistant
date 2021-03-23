@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #12151c;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  height: 8vh;
+  color: white;
+  font-size: 22px;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  height: 92vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 16vw;
+  padding: 8px;
+  background-color: #5c687e;
+  color: white;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84vw;
+  color: white;
+}
+
+button {
+  height: 32px;
+  margin: 0 0 8px;
+}
