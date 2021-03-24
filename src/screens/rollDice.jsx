@@ -1,15 +1,4 @@
-import { useState } from 'react';
-
-Object.setPrototypeOf(Number.prototype, {
-  *[Symbol.iterator]() {
-    const start = 1;
-    const end = Number(this);
-
-    for (let i = start; i <= end; ++i) {
-      yield i;
-    }
-  },
-});
+import { useState, Fragment } from 'react';
 
 function processCommand(command) {
   const normalizedCommand = command.replace(' ', '').replace('d', 'D');
@@ -22,30 +11,45 @@ function processCommand(command) {
   const numberOfFaces = Number(splitByMod[0]);
   const modifier = Number(splitByFaces[1]);
 
-  const rolls = [...numberOfDices].map(
-    () => Math.ceil(Math.random() * numberOfFaces),
+  const rolls = [...Array(numberOfDices)].map(
+    () => ({
+      faces: numberOfFaces,
+      value: Math.ceil(Math.random() * numberOfFaces),
+    }),
   );
 
   return { rolls, modifier };
 }
 
-function Roll(props) {
-  const { roll } = props;
+function rollLevel(value, faces) {
+  if (value == faces) {
+    return 'high';
+  }
 
-  return roll;
+  if (value == 1) {
+    return 'low';
+  }
+
+  return '';
 }
 
-function Result(props) {
+function SingleRoll(props) {
+  const { roll: { value, faces } } = props;
+
+  return <span className={`roll ${rollLevel(value, faces)}`}>{value}</span>;
+}
+
+function AllRolls(props) {
   const { rolls, modifier } = props;
 
   if (rolls.length) {
     return (
       <>
         {rolls.map((roll, index) => (
-          <>
+          <Fragment key={index}>
             {!!index && '+'}
-            <Roll roll={roll} key={index}/>
-          </>
+            <SingleRoll roll={roll}/>
+          </Fragment>
         ))}
         {!!modifier && (
           <span className="modifier">
@@ -57,7 +61,17 @@ function Result(props) {
     );
   }
 
-  return `${rolls} ${modifier}`;
+  return null;
+}
+
+function Result(props) {
+  const { rolls, modifier } = props;
+
+  return (
+    <span className="history-line-result">
+      {rolls.reduce((result, roll) => result + roll.value, modifier)}
+    </span>
+  );
 }
 
 function Line(props) {
@@ -69,9 +83,11 @@ function Line(props) {
   return (
     <div className="history-line" key={command}>
       <span className="history-line-command">/{command}</span>
-      <span className="history-line-result">
-        <Result rolls={rolls} modifier={modifier}/>
-      </span>
+      <div className="history-line-rolls">
+        <AllRolls rolls={rolls} modifier={modifier} />
+        {' = '}
+        <Result rolls={rolls} modifier={modifier} />
+      </div>
     </div>
   );
 }

@@ -66,11 +66,38 @@
   text-align: end;
   overflow-anchor: none;
   display: flex;
+  font-size: 14px;
   justify-content: space-between;
 }
 
 .history-line-command {
   color: gray;
+}
+
+.history-line-rolls {
+}
+
+.history-line-result {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.roll {
+  opacity: 0.5;
+}
+
+.high {
+  font-weight: bold;
+  color: rgb(20, 155, 15);
+}
+
+.low {
+  font-weight: bold;
+  color: rgb(155, 15, 15);
+}
+
+.modifier {
+  opacity: 0.5;
 }
 
 .command {
