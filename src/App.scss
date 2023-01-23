@@ -1,0 +1,118 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #12151c;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  height: 8vh;
+  color: white;
+  font-size: 22px;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  height: 92vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 16vw;
+  padding: 8px;
+  background-color: #5c687e;
+  color: white;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84vw;
+  color: white;
+}
+
+.terminal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: black;
+}
+
+.history {
+  height: calc(100vh - 16px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#history-anchor {
+  overflow-anchor: auto;
+  height: 1px;
+}
+
+.history-line {
+  margin: 0 16px 16px;
+  text-align: end;
+  overflow-anchor: none;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+}
+
+.history-line-command {
+  color: gray;
+}
+
+.history-line-rolls {
+}
+
+.history-line-result {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.roll {
+  opacity: 0.5;
+}
+
+.high {
+  font-weight: bold;
+  color: rgb(20, 155, 15);
+}
+
+.low {
+  font-weight: bold;
+  color: rgb(155, 15, 15);
+}
+
+.modifier {
+  opacity: 0.5;
+}
+
+.command {
+  width: calc(100% - 36px);
+  height: 32px;
+  text-align: end;
+  display: block;
+  padding: 0 16px;
+}
+
+.submit-command {
+  display: none;
+}
+
+button {
+  height: 32px;
+  margin: 0 0 8px;
+}
