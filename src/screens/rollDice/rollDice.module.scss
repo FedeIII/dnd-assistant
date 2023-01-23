@@ -1,0 +1,85 @@
+.terminal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: black;
+}
+
+.history {
+  height: calc(100vh - 16px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#historyAnchor {
+  overflow-anchor: auto;
+  height: 1px;
+}
+
+.command {
+  width: calc(100% - 36px);
+  height: 32px;
+  text-align: end;
+  display: block;
+  padding: 0 16px;
+}
+
+.submitCommand {
+  display: none;
+}
+
+.roll {
+  opacity: 0.5;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid rgb(200, 200, 200);
+  margin: 0 2px;
+
+  &.disabled {
+    background-color: rgb(200, 200, 200);
+    color: rgb(114, 114, 114);
+  }
+
+  &.high {
+    font-weight: bold;
+    color: rgb(20, 155, 15);
+  }
+
+  &.low {
+    font-weight: bold;
+    color: rgb(155, 15, 15);
+  }
+}
+
+.modifier {
+  opacity: 0.5;
+}
+
+.historyLineTotal {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.historyLine {
+  margin: 0 16px 16px;
+  text-align: end;
+  overflow-anchor: none;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+}
+
+.historyLineCommand {
+  color: gray;
+}
+
+.historyLineRolls {
+}
+

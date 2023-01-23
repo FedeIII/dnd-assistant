@@ -1,14 +1,5 @@
 import { useState, Fragment, useMemo } from 'react';
-
-// 2d6      2d20
-// 2d6+1    2d20+1
-// 2d6-1    2d20-1
-// 2d6r1    2d20r1
-// 2d6p1    2d20p1
-// 2d6r1+1  2d20r1+1
-// 2d6r1-1  2d20r1-1
-// 2d6p1+1  2d20p1+1
-// 2d6p1-1  2d20p1-1
+import styles from './rollDice.module.scss';
 
 function getNumberOfDice(command) {
   const numberOfDice = command.substring(0, command.indexOf('D'));
@@ -83,18 +74,18 @@ function processCommand(command) {
 
 function rollLevel(value, faces, isAccounted) {
   if (!isAccounted) {
-    return 'disabled';
+    return styles.disabled;
   }
 
   if (value === faces) {
-    return 'high';
+    return styles.high;
   }
 
   if (value === 1) {
-    return 'low';
+    return styles.low;
   }
 
-  return '';
+  return null;
 }
 
 function SingleRoll(props) {
@@ -104,7 +95,7 @@ function SingleRoll(props) {
   } = props;
 
   return (
-    <span className={`roll ${rollLevel(value, faces, isAccounted)}`}>
+    <span className={`${styles.roll} ${rollLevel(value, faces, isAccounted)}`}>
       {value}
     </span>
   );
@@ -139,7 +130,7 @@ function AllRolls(props) {
           </Fragment>
         ))}
         {!!modifier && (
-          <span className="modifier">
+          <span className={styles.modifier}>
             {modifier > 0 && '+'}
             {modifier}
           </span>
@@ -155,7 +146,7 @@ function TotalRoll(props) {
   const { rolls, modifier, usedIndices } = props;
 
   return (
-    <span className="history-line-total">
+    <span className={styles.historyLineTotal}>
       {rolls.reduce(
         (total, roll) =>
           usedIndices.includes(roll.i) ? total + roll.value : total,
@@ -187,9 +178,9 @@ function Line(props) {
   const usedIndices = useUsedIndices(result);
 
   return (
-    <div className="history-line" key={command}>
-      <span className="history-line-command">/{command}</span>
-      <div className="history-line-rolls">
+    <div className={styles.historyLine} key={command}>
+      <span className={styles.historyLineCommand}>/{command}</span>
+      <div className={styles.historyLineRolls}>
         <AllRolls {...result} usedIndices={usedIndices} />
         {' = '}
         <TotalRoll {...result} usedIndices={usedIndices} />
@@ -217,16 +208,20 @@ function RollDice() {
   };
 
   return (
-    <div className="terminal">
-      <div className="history">
+    <div className={styles.terminal}>
+      <div className={styles.history}>
         {history.map((line, index) => (
           <Line {...line} key={index} />
         ))}
-        <div id="history-anchor" />
+        <div id={styles.historyAnchor} />
       </div>
       <form onSubmit={onCommandSubmit}>
-        <input className="command" value={command} onChange={onCommandChange} />
-        <input type="submit" className="submit-command" />
+        <input
+          className={styles.command}
+          value={command}
+          onChange={onCommandChange}
+        />
+        <input type="submit" className={styles.submitCommand} />
       </form>
     </div>
   );
