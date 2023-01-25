@@ -1,5 +1,6 @@
 const constants = {
-  ROLL: "ROLL",
+  ROLL: 'ROLL',
+  PLACES: 'PLACES',
 };
 
 export default constants;
